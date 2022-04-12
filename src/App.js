@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from "react-dom";
 // import Pet from "./Pet";
 import SearchParams from './SearchParams';
+import Details from './Details';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 
 
@@ -20,9 +22,23 @@ import SearchParams from './SearchParams';
 
 const App = () => {    
         return (
-            <div>
-            <h1>Adopt me </h1>
-            <SearchParams />
+            <div>         
+            <Router>
+            <header>
+            <Link to="/">
+                <h1>Adopt me </h1>
+            </Link>
+            </header>
+            <Switch>
+                <Route path="/details/:id">                    
+                    <Details />                   
+                </Route>
+                <Route path="/">
+                    <SearchParams />
+                </Route>
+                </Switch>
+            </Router>
+            
             {/* <Pet name="John" animal="dog" breed="hav"/>
             <Pet name="mike" animal="cat" breed="adf"/>
             <Pet name="mark" animal="fish" breed="hdfd"/> */}
@@ -30,4 +46,8 @@ const App = () => {
         )
 }
 
-ReactDOM.render(<App/>, document.getElementById("root"));
+ReactDOM.render(
+<StrictMode>
+    <App/>
+</StrictMode>
+, document.getElementById("root"));
